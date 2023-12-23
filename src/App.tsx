@@ -41,7 +41,7 @@ const App = () => {
     },
     {
       key: '5',
-      name: 'Максимильян',
+      name: 'Максимильянч',
       age: 42,
       address: '10 Downing Street',
     },
