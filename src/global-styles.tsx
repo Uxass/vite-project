@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
     body{
-        background-color: red;
+        background-color: #03aeab;
     }
 `
 export default GlobalStyles
