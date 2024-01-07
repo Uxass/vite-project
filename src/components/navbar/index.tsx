@@ -12,7 +12,7 @@ export interface StyledProps{
 const NavbarWrapper = styled.div<StyledProps>`
     height: ${({ArtemHeight}) => ArtemHeight ? ArtemHeight : '100px'};
     width: ${({ArtemWidth}) => ArtemWidth ? ArtemWidth: '300px'};
-    color: red;
+    color: #ff9d15;
     font-size: 45px;
 `
 const NavbarMainWrapper = styled(NavbarWrapper)`

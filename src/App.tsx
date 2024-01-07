@@ -15,6 +15,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 const App = () => {
   useEffect(()=>{
     console.log(1)
+    getUniversity(page, limit, offset);
   },[])
   const {
     register, // метод для регистрации вашего инпута, для дальнейшей работы с ним
@@ -36,157 +37,41 @@ const saveElement: SubmitHandler<IMyForm> = data => {
       reset();
   }
 const [tasks, setTasks] = useState<IMyForm[]>([])
-  const [page, setPage] = useState<number>(1);
-  interface DataType {
-    key: string;
-    name: string;
-    age: number;
-    address: string;
-  }
-  const dataSource: DataType[] = [
-    {
-      key: '1',
-      name: 'Иван',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'Маргарита',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '3',
-      name: 'Степан',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '4',
-      name: 'Александр',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '5',
-      name: 'Максимильянч',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '6',
-      name: 'Александр',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '7',
-      name: 'Александр',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '8',
-      name: 'Александр',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '9',
-      name: 'Александр',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '10',
-      name: 'Александр',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '11',
-      name: 'Иван',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '12',
-      name: 'Маргарита',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '13',
-      name: 'Степан',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '14',
-      name: 'Иван',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '15',
-      name: 'Максимильянч',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '16',
-      name: 'Александр',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '17',
-      name: 'Александр',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '18',
-      name: 'Александр',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '19',
-      name: 'Александр',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '20',
-      name: 'Иван',
-      age: 42,
-      address: '10 Downing Street',
-    },
-  ];
+const [dataSource, setDataSource] = useState<DataType[]>();
+const [page, setPage] = useState<number>(1);
+const limit: number = 10
+const offset: number = (page - 1) * limit
+
+const getUniversity = async (page: number, limit: number, offset: number) => {
+  const response = await axios.get(`http://universities.hipolabs.com/search?offset=${offset}&limit=${limit}`)
+  setDataSource(response.data);    
+}
+
+useEffect(() => {
+  getUniversity(page, limit, offset);
+});
+interface DataType {
+  country: string;
+  name: string;
+}
   const columns: ColumnsType<DataType> = [
     {
-      title: 'Name',
+      title: 'Страна',
+      dataIndex: 'country',
+      key: 'country',
+    },
+    {
+      title: 'Название школы',
       dataIndex: 'name',
       key: 'name',
     },
-    {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
-  ];
+  ]  
   return (
     <><Navbar/>
-    <Table dataSource={dataSource} columns={columns} pagination={false}/>;
-    <Button onClick={() => setPage(page - 1)}>Назад</Button>
-    <Button onClick={() => setPage(page + 1)}>Вперед</Button>
+    <Table dataSource={dataSource} columns={columns} pagination={false}/>
+    <Button onClick={() => setPage((page) => page - 1)} disabled={offset === 1}>Назад</Button>
+    <Button onClick={() => setPage((page) => page + 1)}>Вперед</Button>
+    <h1>{page}</h1>
     {/* <Artem/>
     <Vlad/>    */}
     <Link to={ARTEM_ROUTE + '/1'}>Открыть Артема - v1</Link>
