@@ -7,7 +7,8 @@ import Table, { ColumnsType } from 'antd/es/table'
 import { Routes, Route, Link } from 'react-router-dom'
 import Artem from './pages/Artyom'
 import Vlad from './pages/Vlad'
-import { ARTEM_ROUTE, VLAD_ROUTE } from './app/routing/config'
+
+import { ARTEM_ROUTE, OLEG_ROUTE, VLAD_ROUTE, GENA_ROUTE } from './app/routing/config';
 import MainRouter from './app/routing'
 import Navbar from './components/navbar'
 import { Button } from 'antd'
@@ -65,7 +66,8 @@ interface DataType {
       dataIndex: 'name',
       key: 'name',
     },
-  ]  
+  ]
+  const [isAuth, setIsAuth] = useState(false)  
   return (
     <><Navbar/>
     <Table dataSource={dataSource} columns={columns} pagination={false}/>
