@@ -10,9 +10,13 @@ export interface StyledProps{
     ArtemWidth?: string
     Artemsize?: string
 }
+interface NavProps{
+    setIsAuth: (value: boolean) => void;
+    isAuth: boolean;
+}
 
 const NavbarWrapper = styled.div<StyledProps>`
-    height: ${({ArtemHeight}) => ArtemHeight ? ArtemHeight : '500px'};
+    height: ${({ArtemHeight}) => ArtemHeight ? ArtemHeight : '700px'};
     width: ${({ArtemWidth}) => ArtemWidth ? ArtemWidth: '1200px'};
     color: #bf8e06;
     background-color: #05538e;
@@ -22,7 +26,7 @@ const NavbarMainWrapper = styled(NavbarWrapper)`
     font-size: 45px;
 `
 
-const Navbar = () => {
+const Navbar: React.FC <NavProps> = ({setIsAuth, isAuth}) => {
     const [currentTheme, setCurrentTheme] = useState<"dark" | "light">('light')
 
     const changeTheme = () => {
@@ -30,9 +34,16 @@ const Navbar = () => {
         document.documentElement.setAttribute('data-theme', newTheme)
         setCurrentTheme(newTheme);
     }
+    const AuthState = () => {
+        setIsAuth(true);        
+    }    
+
+    const notAuthState = () => {
+        setIsAuth(false);        
+    }
     return (
         <>
-        <NavbarWrapper ArtemHeight="500px" ArtemWidth="1200px">
+        <NavbarWrapper ArtemHeight="700px" ArtemWidth="1200px">
           <Link to={ARTEM_ROUTE}>ARTEM_ROUTE</Link>
           <br></br>
           <Link to={ARTEM_ROUTE + '/2'}>Открыть Артема - v2</Link>
@@ -43,7 +54,19 @@ const Navbar = () => {
           <br></br>
           <Link to={OLEG_ROUTE}>OLEG_ROUTE</Link>
           <br></br>
-          <button onClick={() => changeTheme()}>Сменить тему</button> 
+          <button onClick={() => changeTheme()}>Сменить тему</button>
+          <div>
+            {isAuth ? (
+              <button onClick={notAuthState}>
+                Выход
+              </button>
+            ) : (
+              <button onClick={AuthState} >
+                Вход
+              </button>
+            )}
+            {isAuth ? <></> : <button>Регистрация</button>}
+          </div>
         </NavbarWrapper>
         </>
     )
