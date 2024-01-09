@@ -15,47 +15,47 @@ import { Button } from 'antd'
 import { SubmitHandler, useForm } from "react-hook-form";
 import Gena from './pages/Gena'
 const App = () => {
-  useEffect(()=>{
+  useEffect(() => {
     console.log(1)
     getUniversity(page, limit, offset);
-  },[])
+  }, [])
   const {
     register, // метод для регистрации вашего инпута, для дальнейшей работы с ним
     handleSubmit, // метод для получения данных формы, если валидация прошла успешна
-    formState: {errors, isValid}, // errors - список ошибок валидации для всех полей формы
+    formState: { errors, isValid }, // errors - список ошибок валидации для всех полей формы
     reset // метод для очистки полей формы
-} = useForm<IMyForm>({
+  } = useForm<IMyForm>({
     mode: "onBlur", // парметр onBlur - отвечает за запуск валидации при не активном состоянии поля
-})
-interface IMyForm {
-  name: string;
-  age: number;
-  country: string;
-}
-const saveElement: SubmitHandler<IMyForm> = data => {
-  // здесь мы передаём новый массив, который содержит все старые элементы и новый
-  // ...prev - мы получаем все элементы текущего стэйте (с помощью spread оператора)
-      setTasks((prev) => [...prev, data])
-      reset();
+  })
+  interface IMyForm {
+    name: string;
+    age: number;
+    country: string;
   }
-const [tasks, setTasks] = useState<IMyForm[]>([])
-const [dataSource, setDataSource] = useState<DataType[]>();
-const [page, setPage] = useState<number>(1);
-const limit: number = 10
-const offset: number = (page - 1) * limit
+  const saveElement: SubmitHandler<IMyForm> = data => {
+    // здесь мы передаём новый массив, который содержит все старые элементы и новый
+    // ...prev - мы получаем все элементы текущего стэйте (с помощью spread оператора)
+    setTasks((prev) => [...prev, data])
+    reset();
+  }
+  const [tasks, setTasks] = useState<IMyForm[]>([])
+  const [dataSource, setDataSource] = useState<DataType[]>();
+  const [page, setPage] = useState<number>(1);
+  const limit: number = 10
+  const offset: number = (page - 1) * limit
 
-const getUniversity = async (page: number, limit: number, offset: number) => {
-  const response = await axios.get(`http://universities.hipolabs.com/search?offset=${offset}&limit=${limit}`)
-  setDataSource(response.data);    
-}
+  const getUniversity = async (page: number, limit: number, offset: number) => {
+    const response = await axios.get(`http://universities.hipolabs.com/search?offset=${offset}&limit=${limit}`)
+    setDataSource(response.data);
+  }
 
-useEffect(() => {
-  getUniversity(page, limit, offset);
-});
-interface DataType {
-  country: string;
-  name: string;
-}
+  useEffect(() => {
+    getUniversity(page, limit, offset);
+  });
+  interface DataType {
+    country: string;
+    name: string;
+  }
   const columns: ColumnsType<DataType> = [
     {
       title: 'Страна',
@@ -68,76 +68,67 @@ interface DataType {
       key: 'name',
     },
   ]
-  const [isAuth, setIsAuth] = useState(false)  
-  function Auth(){
-    const [isAuth, setIsAuth] = useState(false)
-    return (
-          <button onClick={() => {
-            useState(true);
-          }}>
-            Авторизация
-          </button>
-      );
-}
+
+  const [isAuth, setIsAuth] = useState(false)
+
   return (
-
     <>
-    <MainRouter isAuth={false}/>
-    <Navbar/>
-    <Table dataSource={dataSource} columns={columns} pagination={false}/>
-    <Button onClick={() => setPage((page) => page - 1)} disabled={offset === 1}>Назад</Button>
-    <Button onClick={() => setPage((page) => page + 1)}>Вперед</Button>
-    <h1>{page}</h1>
+      <MainRouter isAuth = {isAuth}/>
+      <Navbar setIsAuth={setIsAuth} isAuth={isAuth} />
+      <Table dataSource={dataSource} columns={columns} pagination={false} />
+      <Button onClick={() => setPage((page) => page - 1)} disabled={offset === 1}>Назад</Button>
+      <Button onClick={() => setPage((page) => page + 1)}>Вперед</Button>
+      <h1>{page}</h1>
 
-    <form onSubmit={handleSubmit(saveElement)}>
-      <input
+      <form onSubmit={handleSubmit(saveElement)}>
+        <input
           {...register('name', {
-                  required: "Поле обязательно для заполнения",
-                  minLength: {
-                      value: 7,
-                      message: "Нужно больше символов - Ваше имя"
-                  }
-              }
-        )}
-      />
-      <div>{errors.name?.message}</div>
-      <input 
+            required: "Поле обязательно для заполнения",
+            minLength: {
+              value: 7,
+              message: "Нужно больше символов - Ваше имя"
+            }
+          }
+          )}
+        />
+        <div>{errors.name?.message}</div>
+        <input
           {...register('age', {
-                  required: "Поле обязательно для заполнения",
-                  minLength: {
-                      value: 10,
-                      message: "Нужно больше символов"
-                  }
-              }
+            required: "Поле обязательно для заполнения",
+            minLength: {
+              value: 10,
+              message: "Нужно больше символов"
+            }
+          }
           )}
-      />
-      <input 
+        />
+        <input
           {...register('country', {
-                  required: "Поле обязательно для заполнения",
-                  minLength: {
-                      value: 3,
-                      message: "Нужно больше символов"
-                  }
-              }
+            required: "Поле обязательно для заполнения",
+            minLength: {
+              value: 3,
+              message: "Нужно больше символов"
+            }
+          }
           )}
-      />
-      <div>{errors.country?.message}</div>
-      <button disabled={!isValid} type="submit">Сохранить</button>
-    </form>
-    {
-      tasks.map((task) => 
+        />
+        <div>{errors.country?.message}</div>
+        <button disabled={!isValid} type="submit">Сохранить</button>
+      </form>
+      {
+        tasks.map((task) =>
           <p>
-              {task.name} - {task.age} - {task.country}
+            {task.name} - {task.age} - {task.country}
           </p>
-      )
-    }
+        )
+      }
     </>
   )
 
 }
 
 
- 
+
 
 
 

@@ -6,7 +6,10 @@ import Artem from '../../pages/Artyom';
 import Oleg from '../../pages/Oleg'
 import { ARTEM_ROUTE, GENA_ROUTE, VLAD_ROUTE, OLEG_ROUTE } from './config';
 
-const MainRouter = ({isAuth = false}) => {
+interface RouterProps {
+  isAuth: boolean;
+}
+const MainRouter: React.FC<RouterProps> = ({isAuth = false}) => {
   
   const basedPath: RouteObject[] = [
     { path: ARTEM_ROUTE, element: <Artem />,},
