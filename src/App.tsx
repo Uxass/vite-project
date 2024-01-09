@@ -13,6 +13,7 @@ import MainRouter from './app/routing'
 import Navbar from './components/navbar'
 import { Button } from 'antd'
 import { SubmitHandler, useForm } from "react-hook-form";
+import Gena from './pages/Gena'
 const App = () => {
   useEffect(()=>{
     console.log(1)
@@ -68,24 +69,26 @@ interface DataType {
     },
   ]
   const [isAuth, setIsAuth] = useState(false)  
+  function Auth(){
+    const [isAuth, setIsAuth] = useState(false)
+    return (
+          <button onClick={() => {
+            useState(true);
+          }}>
+            Авторизация
+          </button>
+      );
+}
   return (
-    <><Navbar/>
+
+    <>
+    <MainRouter isAuth={false}/>
+    <Navbar/>
     <Table dataSource={dataSource} columns={columns} pagination={false}/>
     <Button onClick={() => setPage((page) => page - 1)} disabled={offset === 1}>Назад</Button>
     <Button onClick={() => setPage((page) => page + 1)}>Вперед</Button>
     <h1>{page}</h1>
-    {/* <Artem/>
-    <Vlad/>    */}
-    <Link to={ARTEM_ROUTE + '/1'}>Открыть Артема - v1</Link>
-    <br>
-    </br>
-    <Link to={ARTEM_ROUTE + '/2'}>Открыть Артема - v2</Link>
-    <Link to={VLAD_ROUTE}>Открыть Влада</Link>
-    <MainRouter></MainRouter>
-    {/* <Routes>
-    <Route path='artem' element={<Artem/>} />
-    <Route path='vlad' element={<Vlad/>} />
-    </Routes> */}
+
     <form onSubmit={handleSubmit(saveElement)}>
       <input
           {...register('name', {

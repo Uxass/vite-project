@@ -30,6 +30,9 @@ const Navbar = () => {
         document.documentElement.setAttribute('data-theme', newTheme)
         setCurrentTheme(newTheme);
     }
+
+
+    
     return (
         <>
         <NavbarWrapper ArtemHeight="500px" ArtemWidth="1200px">
@@ -43,7 +46,8 @@ const Navbar = () => {
           <br></br>
           <Link to={OLEG_ROUTE}>OLEG_ROUTE</Link>
           <br></br>
-          <button onClick={() => changeTheme()}>Сменить тему</button> 
+          <button onClick={() => changeTheme()}>Сменить тему</button>
+          <button onClick={() => useState()}>Авторизация</button>
         </NavbarWrapper>
         </>
     )
