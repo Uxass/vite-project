@@ -1,0 +1,58 @@
+/* Стили CSS */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .link {
+    display: block;
+    text-decoration: none;
+    color: #007bff;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  a{
+    border: 2px solid rgb(11, 178, 255);
+  }
+  .theme-button,
+  .auth-button,
+  .register-button {
+    
+    margin: 10px 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .theme-button:hover,
+  .auth-button:hover,
+  .register-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Стили для группы кнопок авторизации */
+  .auth-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  

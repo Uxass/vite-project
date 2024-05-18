@@ -1,10 +1,11 @@
 import React from "react";
 import { version } from "react-dom/server";
 import { useParams } from 'react-router-dom';
-const Artem = () => {
+const PDF = () => {
+    const {version} = useParams()
     return (
-    <>Я родился - Моя версия</>
+    <>Первый модуль с PDF</>
     )
 }
 
-export default Artem;
+export default PDF;
