@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { FC, useEffect, useState } from "react";
 import CardUniversity, { IUniversity } from './CardUniversity'
 import { useInView } from "react-intersection-observer";
@@ -17,7 +18,7 @@ const BlockObserver = styled.div`
   background-color: black;
 `;
 
-const ListUniversities: FC = () => {
+const UniversityTable: FC = () => {
   const [universities, setUniversities] = useState<Array<IUniversity>>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -61,4 +62,4 @@ const ListUniversities: FC = () => {
   );
 };
 
-export default ListUniversities;
+export default UniversityTable;

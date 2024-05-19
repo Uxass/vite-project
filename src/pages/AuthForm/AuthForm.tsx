@@ -7,7 +7,7 @@ interface IMyForm {
   email: string;
 }
 
-const FormAuf = () => {
+const AuthForm = () => {
   const {
     register,
     handleSubmit,
@@ -110,4 +110,4 @@ const FormAuf = () => {
   );
 };
 
-export default FormAuf;
+export default AuthForm;
