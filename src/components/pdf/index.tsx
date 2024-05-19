@@ -17,11 +17,12 @@ const styles = StyleSheet.create({
 });
 
 
-interface ??? {
-    ???
+interface MyDocumentProps {
+ name: string;
+ picture: string;
 }
 
-const  MyDocument: FC<???> = ({ name, picture }) => {
+const  MyDocument: React.FC<MyDocumentProps> = ({ name, picture }) => {
     return (
         <Document>
             <Page size="A4" style={styles.page} wrap>
