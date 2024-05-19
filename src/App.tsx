@@ -1,4 +1,5 @@
 // App.jsx
+/* eslint-disable */
 import { useState } from 'react';
 import './App.css';
 import MainRouter from './app/routing';
