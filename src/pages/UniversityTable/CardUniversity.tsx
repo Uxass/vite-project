@@ -16,7 +16,6 @@ const CardUniversity: FC<{ data: IUniversity }> = ({ data }) => (
   <CardStyled>
     <title>{data.name}</title>
     <span>{data.country}</span>
-    <p>data.alpha_two_code{data.alpha_two_code}</p>
   </CardStyled>
 );
 

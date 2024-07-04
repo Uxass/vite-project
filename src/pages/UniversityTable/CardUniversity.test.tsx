@@ -6,6 +6,8 @@ test("renders university card with correct data", () => {
   const testData = {
     country: "USA",
     name: "Harvard University",
+    alpha_two_code: "US", 
+
   };
 
   const { getByText } = render(<CardUniversity data={testData} />);

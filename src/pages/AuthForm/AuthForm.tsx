@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
+import "./AuthForm.styles.css";
 interface IMyForm {
   name: string;
   age: number;
